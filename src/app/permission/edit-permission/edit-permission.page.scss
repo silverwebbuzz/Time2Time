@@ -1,0 +1,40 @@
+.page-addPermission{
+    --padding-bottom: 8px;
+    --padding-end: 8px;
+    --padding-start: 8px;
+    --padding-top: 8px;
+
+    .size{
+        font-size: 13.5px;
+    }
+
+    .row-table{
+        margin-top: 10px;
+        //border-top: 0.5px solid #ccc;
+    }
+    .col-per-head{
+        font-size: 10px;
+        font-weight: bold;
+        color: #888;
+    }
+
+    .col-per{
+        font-size: 12px;
+    }
+
+}
+
+.col-footer{
+    padding: 0px;  
+}
+.btn-footer{
+    margin: 0px;
+    color: #fff;
+    --color-activated: #fff;
+}
+.btn-save{
+    --background: var(--ion-color-secondary-shade);
+}
+.btn-back{
+    --background: var(--ion-color-warning-shade);
+}

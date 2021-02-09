@@ -1,0 +1,140 @@
+<ion-header>
+  <ion-toolbar color="primary" class="clr" text-center>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">
+      Add New Member
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <form [formGroup]="addmembers_form" autocomplete="off">
+
+  <ion-item lines="none" class="input-item">
+    <ion-label position="stacked" class="input-lbl">First Name</ion-label>
+    <ion-input type="text" formControlName="firstname" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.firstname.hasError('required') && addmembers_form.controls.firstname.touched">
+      <p class="content">Please Enter First Name!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Last Name</ion-label>
+    <ion-input type="text" formControlName="lastname" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.lastname.hasError('required') && addmembers_form.controls.lastname.touched">
+      <p class="content">Please Enter Last Name!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Username</ion-label>
+    <ion-input type="text" formControlName="username" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.username.hasError('required') && addmembers_form.controls.username.touched">
+      <p class="content">Please Enter Username!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Email</ion-label>
+    <ion-input type="text" formControlName="email" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.email.hasError('required') && addmembers_form.controls.email.touched">
+      <p class="content">Please Enter Email!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.email.hasError('pattern') && addmembers_form.controls.email.touched">
+      <p class="content">Please Enter Valid Email!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.email.hasError('incorrect') && addmembers_form.controls.email.touched">
+      <p class="content">Email is already taken!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Password</ion-label>
+    <ion-input type="password" formControlName="password" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+  *ngIf="addmembers_form.controls.password.hasError('required') && addmembers_form.controls.password.touched">
+  <p class="content">Please Enter a Password!</p>
+</ion-item>
+<ion-item no-padding lines="none" class="validator-error"
+  *ngIf="addmembers_form.controls.password.hasError('minlength') && addmembers_form.controls.password.touched">
+  <p class="content">The password needs at least 8 characters.</p>
+</ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Confirm Password</ion-label>
+    <ion-input type="password" formControlName="confirmpassword" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.confirmpassword.hasError('required') && addmembers_form.controls.confirmpassword.touched">
+      <p class="content">Please Enter a Confirm Password!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.get('confirmpassword').errors && addmembers_form.get('confirmpassword').errors.confirmpassword">
+      <p class="content">Passwords must match!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Phone</ion-label>
+    <ion-input type="number" formControlName="phone" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.phone.hasError('required') && addmembers_form.controls.phone.touched">
+      <p class="content">Please Enter Phone!</p>
+    </ion-item> 
+
+  <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Permission</ion-label>
+      <ion-select interface="action-sheet" formControlName="group_id" placeholder="Select Permission"
+        class="btn-select bg" mode="md">
+        <ion-select-option *ngFor="let opt of permissionlist" [value]="opt.id">{{opt.group_name}}</ion-select-option>
+        <!-- <ion-select-option value="group_id">Admin</ion-select-option> -->
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addmembers_form.controls.group_id.hasError('required') && addmembers_form.controls.group_id.touched">
+      <p class="content">Please Select Permission!</p>
+    </ion-item>
+
+    <div class="div-que add">
+
+        <ion-label class="lbl-head">Gender</ion-label>
+
+        <ion-radio-group formControlName="gender">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Male</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Female</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+      </form>
+
+</ion-content>
+
+<ion-footer>
+    <ion-button expand="full" class="btn-footer" (click)="addMember()">
+      Save
+    </ion-button>
+  </ion-footer>

@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-toolbar color="primary" class="clr" text-center>
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">
+      Warehouse Products
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar id="searchValue" color="light" placeholder="Search..." (ionChange)="searchBar($event.target.value)">
+    </ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar color="primary" class="lbl-tool-result">
+    <ion-row class="bg-row">
+      <ion-col size="12" class="bg-col">
+        <ion-label class="lbl-result">About {{warehouseProd?.length}} Stock</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-warehouseProducts">
+
+  <div class="blue-background"></div>
+
+  <div class="isEmpty" *ngIf="warehouseProd?.length < 1">
+    <ion-label class="lbl-empty">No Record Found!</ion-label>
+  </div>
+
+  <ion-card class="card-main" [ngClass]="{'isActive': item.availability == 2 }"
+    *ngFor="let item of warehouseProd | slice:0:limit">
+    <ion-row class="row-card" (click)="expandItem(item)">
+      <ion-col size="2" class="col-img">
+        <img *ngIf="!item.image" src="{{user_not_found_place_holder}}" class="img-prod" />
+        <img *ngIf="item.image" src="{{imageUrl}}{{item.image}}" class="img-prod" />
+      </ion-col>
+      <ion-col size="8" class="col-lbl">
+        <ion-label class="col-title">Brand</ion-label>
+        <ion-label class="col-value" *ngFor="let cat of item.category_data;let isLast=last">
+          {{cat.name}}{{isLast ? '' : ' ,'}}</ion-label>
+      </ion-col>
+      <ion-col size="2" class="col-edit">
+        <ion-button size="small" fill="clear" class="btn-edit" *ngIf="!item.expanded">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
+        <ion-button size="small" fill="clear" class="btn-edit" *ngIf="item.expanded">
+          <ion-icon name="arrow-down"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="row-card">
+      <ion-col size="2"></ion-col>
+      <ion-col size="10" class="col-lbl">
+        <ion-label class="col-title">Refrence Number</ion-label>
+        <ion-label class="col-value">{{item.name}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ng-container *ngIf="item.expanded">
+      <ion-card-content class="main-card-content">
+        <app-expandable expandHeight="100px" [expanded]="item.expanded">
+          <ion-row class="row-card">
+            <ion-col size="2" class="col-lbl">
+            </ion-col>
+            <ion-col size="10" class="col-lbl">
+              <ion-label class="col-title">Serial</ion-label>
+              <ion-label class="col-value">{{item?.sku ? item?.sku : '-'}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-card">
+            <ion-col size="2" class="col-lbl">
+              <!-- <ion-button [hidden]="permission == 'client1'" size="small" fill="clear" class="edit" (click)="edit(item.id)">
+              <ion-icon name="create" mode="md"></ion-icon>
+            </ion-button> -->
+            </ion-col>
+            <ion-col size="5" class="col-lbl">
+              <ion-label class="col-title">Currency</ion-label>
+              <ion-label class="col-value">{{item?.currency ? item?.currency : '-'}}</ion-label>
+            </ion-col>
+            <ion-col size="5" class="col-lbl">
+              <ion-label class="col-title">Price</ion-label>
+              <ion-label class="col-value">{{item?.price ? item?.price : '-'}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-card">
+            <ion-col size="2" class="col-lbl">
+              <!-- <ion-button [hidden]="permission == 'client1'" size="small" fill="clear" class="edit"
+                (click)="edit(item.id)">
+                <ion-icon name="create" mode="md"></ion-icon>
+              </ion-button> -->
+            </ion-col>
+            <ion-col size="10" class="col-lbl">
+              <ion-label class="col-title">Status</ion-label>
+              <ion-label class="col-value">
+                <ng-container *ngIf="item.qty == 0">In Stock</ng-container>
+                <ng-container *ngIf="item.qty == 1">Sold</ng-container>
+                <ng-container *ngIf="item.qty == 2">Consignment</ng-container>
+                <ng-container *ngIf="item.qty == 3">For Reparing</ng-container>
+                <ng-container *ngIf="item.qty == 4">Mr Rameez Personal Watch</ng-container>
+                <ng-container *ngIf="item.qty == 5">Return to Brand</ng-container>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-card">
+            <ion-col size="2" class="col-lbl">
+              <!-- <ion-button [hidden]="permission == 'client1'" size="small" fill="clear" class="dlt"
+                (click)="delete(item.id)">
+                <ion-icon name="trash" mode="md"></ion-icon>
+              </ion-button> -->
+            </ion-col>
+            <ion-col size="10" class="col-lbl">
+              <ion-label class="col-title">Warehouse</ion-label>
+              <ion-label class="col-value">{{item?.store_name ? item?.store_name : '-'}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </app-expandable>
+      </ion-card-content>
+    </ng-container>
+  </ion-card>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

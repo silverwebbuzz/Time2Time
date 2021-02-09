@@ -1,0 +1,157 @@
+<ion-header>
+    <ion-toolbar color="primary" class="clr" text-center>
+      <ion-buttons slot="start">
+        <ion-menu-button color="light"></ion-menu-button>
+      </ion-buttons>
+      <ion-title color="light" class="head">
+        Add Permission
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="page-addPermission">
+ 
+    <form [formGroup]="addpermission_form" autocomplete="off">
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Permission Name</ion-label>
+          <ion-input type="text" formControlName="group_name" placeholder="Enter group name" color="primary" class="input-box boxes"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="addpermission_form.controls.group_name.hasError('required') && addpermission_form.controls.group_name.touched">
+          <p class="content">Please Enter Permission Name!</p>
+        </ion-item>
+
+        <ion-row class="row-table">
+          <ion-col size="4" class="col-per-head">Permission</ion-col>
+          <ion-col size="2" class="col-per-head">Create</ion-col>
+          <ion-col size="2" class="col-per-head">Update</ion-col>
+          <ion-col size="2" class="col-per-head">View</ion-col>
+          <ion-col size="2" class="col-per-head">Delete</ion-col>
+        </ion-row>
+
+        <!---------------- Member Module ----------->
+        <ion-row>
+             <ng-container *ngFor="let list of checklist; let i = index">
+              <ng-container *ngIf="list.value == 'createUser' || list.value == 'updateUser' || list.value == 'viewUser' || list.value == 'deleteUser'">
+                <ion-col size="4" class="col-per" *ngIf="i == 0">Member</ion-col>
+                <ion-col size="2" class="col-per">
+                  <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                </ion-col>
+              </ng-container>
+            </ng-container>
+        </ion-row>
+
+        <!---------------- Permission Module ----------->
+        <ion-row>
+            <ng-container *ngFor="let list of checklist; let i = index">
+                <ng-container *ngIf="list.value == 'createGroup' || list.value == 'updateGroup' || list.value == 'viewGroup' || list.value == 'deleteGroup'">
+                  <ion-col size="4" class="col-per" *ngIf="i == 4">Permission</ion-col>
+                  <ion-col size="2" class="col-per">
+                    <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                  </ion-col>
+                </ng-container>
+            </ng-container>  
+        </ion-row>
+
+        <!---------------- Items(Brand) Module ----------->
+        <ion-row>
+            <ng-container *ngFor="let list of checklist; let i = index">
+                <ng-container *ngIf="list.value == 'createBrand' || list.value == 'updateBrand' || list.value == 'viewBrand' || list.value == 'deleteBrand'">
+                  <ion-col size="4" class="col-per" *ngIf="i == 8">Items</ion-col>
+                  <ion-col size="2" class="col-per">
+                    <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                  </ion-col>
+                </ng-container>
+            </ng-container>  
+        </ion-row>
+
+        <!---------------- Category Module ----------->
+        <ion-row>
+            <ng-container *ngFor="let list of checklist; let i = index">
+                <ng-container *ngIf="list.value == 'createCategory' || list.value == 'updateCategory' || list.value == 'viewCategory' || list.value == 'deleteCategory'">
+                  <ion-col size="4" class="col-per" *ngIf="i == 12">Category</ion-col>
+                  <ion-col size="2" class="col-per">
+                    <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                  </ion-col>
+                </ng-container>
+            </ng-container>  
+        </ion-row>
+
+        
+        <!---------------- Warehouse(Store) Module ----------->
+        <ion-row>
+            <ng-container *ngFor="let list of checklist; let i = index">
+                <ng-container *ngIf="list.value == 'createStore' || list.value == 'updateStore' || list.value == 'viewStore' || list.value == 'deleteStore'">
+                  <ion-col size="4" class="col-per" *ngIf="i == 16">Warehouse</ion-col>
+                  <ion-col size="2" class="col-per">
+                    <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                  </ion-col>
+                </ng-container>
+            </ng-container>  
+        </ion-row>
+
+        <!---------------- Elements(Attribute) Module ----------->
+        <ion-row>
+            <ng-container *ngFor="let list of checklist; let i = index">
+                <ng-container *ngIf="list.value == 'createAttribute' || list.value == 'updateAttribute' || list.value == 'viewAttribute' || list.value == 'deleteAttribute'">
+                  <ion-col size="4" class="col-per" *ngIf="i == 20">Elements</ion-col>
+                  <ion-col size="2" class="col-per">
+                    <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                  </ion-col>
+                </ng-container>
+            </ng-container>  
+        </ion-row>
+        
+          <!---------------- Products Module ----------->
+          <ion-row>
+              <ng-container *ngFor="let list of checklist; let i = index">
+                  <ng-container *ngIf="list.value == 'createProduct' || list.value == 'updateProduct' || list.value == 'viewProduct' || list.value == 'deleteProduct'">
+                    <ion-col size="4" class="col-per" *ngIf="i == 24">Products</ion-col>
+                    <ion-col size="2" class="col-per">
+                      <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                    </ion-col>
+                  </ng-container>
+              </ng-container>  
+          </ion-row>
+
+          
+        <!---------------- Orders Module ----------->
+        <ion-row>
+            <ng-container *ngFor="let list of checklist; let i = index">
+                <ng-container *ngIf="list.value == 'createOrder' || list.value == 'updateOrder' || list.value == 'viewOrder' || list.value == 'deleteOrder'">
+                  <ion-col size="4" class="col-per" *ngIf="i == 28">Orders</ion-col>
+                  <ion-col size="2" class="col-per">
+                    <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                  </ion-col>
+                </ng-container>
+            </ng-container>  
+        </ion-row>
+       
+         <!---------------- Company Module ----------->
+         <ion-row>
+            <ng-container *ngFor="let list of checklist; let i = index">
+                <ng-container *ngIf="list.value == '-'">
+                    <ion-col size="4" class="col-per" *ngIf="i == 32">Company</ion-col>
+                    <ion-col size="2" class="col-per">
+                      -
+                    </ion-col>
+                </ng-container>
+
+                <ng-container *ngIf="list.value == 'updateCompany'">
+                  <ion-col size="4" class="col-per" *ngIf="i == 32">Company</ion-col>
+                  <ion-col size="2" class="col-per">
+                    <input type="checkbox" [(ngModel)]="list.isSelected" formControlName="permission" value="{{list.id}}" (change)="isAllSelected()"/>
+                  </ion-col>
+                </ng-container>
+            </ng-container>  
+        </ion-row>
+          
+        
+
+      </form>
+  </ion-content>
+  <ion-footer>
+      <ion-button expand="full" class="btn-footer" (click)="addPermission()">Save</ion-button>
+  </ion-footer>

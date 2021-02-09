@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar color="primary" class="clr" text-center>
+      <ion-buttons slot="start">
+          <ion-menu-button color="light"></ion-menu-button>
+      </ion-buttons>
+      <ion-title color="light" class="head">
+        Search Products
+      </ion-title>
+    </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-searchbar color="light" placeholder="Search products..."  (ionChange)="ionViewWillEnter($event.target.value)"></ion-searchbar>
+      </ion-toolbar>
+  </ion-header>
+
+<ion-content class="page-search">
+
+    <ion-row class="row-table">
+        <ion-col size="6" class="col-per-head">Category</ion-col>
+        <ion-col size="3" class="col-per-head">Inventory</ion-col>
+        <ion-col size="3" class="col-per-head">Sold</ion-col>
+      </ion-row>
+
+      <ion-row class="row-table" *ngFor="let search of search | slice:0:limit;">
+          <ion-col size="6" class="col-per" >{{search.name}}</ion-col>
+          <ion-col size="3" class="col-per">{{search.Inventory}}</ion-col>
+          <ion-col size="3" class="col-per">{{search.Sold}}</ion-col>
+        </ion-row>
+
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+          <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more data...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col size="6" class="col-footer addR">
+      <ion-button expand="full" class="btn-footer in">
+        Inventory {{total}}
+      </ion-button>
+    </ion-col>
+    <ion-col size="6" class="col-footer addL">
+        <ion-button expand="full" class="btn-footer out">
+         Sold {{sold}}
+        </ion-button>
+      </ion-col>
+  </ion-row>
+</ion-footer>

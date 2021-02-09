@@ -1,0 +1,79 @@
+.add{
+    margin-top: 16px;
+}
+.page-signin{
+    --padding-start: 32px;
+    --padding-end: 32px;
+    --padding-top: 32px;
+    --padding-bottom: 32px;
+    // --background: url(../../assets/image/bg.jpg) no-repeat bottom center / cover;
+    --background: url(../../assets/image/bg4.png) 0 0/100% 100% no-repeat;
+}
+.div-main{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 80%;
+}
+ion-item{
+    --background: transparent;
+    --inner-padding-end: 0px;
+
+    ion-input{
+        border-bottom: 1px solid #ccc;
+        margin-left: 8px;
+        --placeholder-color: #fff;
+        --color: #fff;
+    }
+}
+.email{
+    height: 22px;
+    width: 30px;
+}
+.lock{
+    height: 30px;
+    width: 30px;
+}
+ion-checkbox{
+    --background: transparent;
+    --border-color: #fff;
+    --border-color-checked: #fff;
+    --checkmark-color: #fff;
+}
+.me{
+    margin-top: 8px;
+    position: absolute;
+    right: 0;
+    --background-activated: var(--ion-color-primary);
+    --inner-padding-end: 0px;
+    
+    .me-lbl{
+        margin-right: 0px;
+    }
+}
+.add-error{
+    width: 100%;
+    text-align: right;
+}
+.error-spc{
+    --min-height: 18px;
+}
+
+// .card-logo{
+//     margin: 0;
+//     border-radius: 0px;
+//     box-shadow: 0 0;
+    
+//     .icon-logo{
+//         height: auto;
+//         width: 50px;
+//         margin: auto;
+//     }
+//     .lbl-logo{
+//         height: 40px;
+//         width: 175px;
+//         margin: auto;
+//     }
+// }

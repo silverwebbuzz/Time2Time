@@ -1,0 +1,72 @@
+.add-prod{
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.add{
+    margin-top: 8px;
+}
+.btn-footer{
+    margin: 0px;
+    color: #fff;
+    --color-activated: #fff;
+}
+.btn-edit{
+    display: block;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    //margin: 25px 8px 0px 8px;
+}
+.format-div{
+    // border: 1px dotted #383a3e; 
+    // margin: 16px 8px 0px 8px;
+    // background: #f1f1f1;
+
+    .format-img{
+        height: 100px; 
+        width: 100px; 
+        display: block; 
+        //padding: 10px; 
+        margin: auto;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .format-label{
+        display: block; 
+        text-align: center; 
+        padding: 8px;
+    }
+}
+
+.btn {
+    //border: 2px solid #383a3e;
+    font-weight: bold;
+    //margin: 8px 0px 24px 0px;
+  }
+  
+  .upload-btn-wrapper input[type=file] {
+    font-size: 38px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .lbl-add{
+    font-weight: bold;
+    color: #888;
+    display: block;
+    margin-top: 15px;
+}
+
+.error-item{
+    text-align: center;
+    
+    .error-p{
+        width: 100%;
+    }
+}

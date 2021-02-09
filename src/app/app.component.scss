@@ -1,0 +1,52 @@
+.active{
+    --ion-text-color: var(--ion-color-primary);
+    ion-icon{
+        --ion-text-color-rgb: var(--ion-color-primary);
+    }
+}
+
+.active-parent{
+    font-weight: 500;
+}
+
+.sub-item{
+    padding-left: 20px;
+}
+
+.card-profile{
+    margin: 0px; 
+    border-radius: 0px; 
+
+    .profile-pic{
+        //width: 150px;
+        display: block;
+        text-align: center;
+        margin: auto;
+        padding: 20px;
+        // margin-top: 2%;
+        // margin-bottom: 2%;
+    }
+}
+
+.head-tool{
+    --padding-start: 0px;
+    --padding-bottom: 0px;
+    --padding-top: 0px;
+    --padding-end: 0px;
+}
+
+.items{
+    --min-height: 32px;
+}
+
+.spc-menu{
+    margin-bottom: 0px;
+}
+
+.icon-end{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+// .spc{
+//     margin-right: 22px;
+// }

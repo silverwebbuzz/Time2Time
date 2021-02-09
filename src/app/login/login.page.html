@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary" class="head">Login</ion-title>
+  </ion-toolbar>
+  <ion-progress-bar *ngIf="login_process" type="indeterminate"></ion-progress-bar>
+</ion-header>
+
+<ion-content padding class="page-signin">
+
+  <!-- <ion-card class="card-logo">
+    <img src="../../assets/image/logo.png" class="icon-logo"/>
+    <img src="../../assets/image/logo1.png" class="lbl-logo"/>
+  </ion-card> -->
+
+  <img src="../../assets/image/logo2.png" class="lbl-logo" />
+
+  <form [formGroup]="login_form" autocomplete="off">
+
+    <div class="div-main">
+
+    <ion-item lines="none" class="input-item add">
+      <ion-icon src="../../assets/icon/iconmonstr-email-2.svg" slot="start" color="light"></ion-icon>
+      <!-- <ion-label position="stacked" class="input-lbl">Email</ion-label> -->
+      <ion-input type="text" formControlName="email" placeholder="Email" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error error-spc"
+      *ngIf="login_form.controls.email.hasError('required') && login_form.controls.email.touched">
+      <p class="content add-error">Please Enter Email Address!</p>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error error-spc"
+      *ngIf="login_form.controls.email.hasError('incorrect') && login_form.controls.email.touched">
+      <p class="content add-error">Email Address Does Not Exists.</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+        <ion-icon src="../../assets/icon/iconmonstr-lock-4.svg" slot="start" color="light"></ion-icon>
+      <!-- <ion-label position="stacked" class="input-lbl">Password</ion-label> -->
+      <ion-input type="password" formControlName="password" placeholder="Password" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error error-spc"
+      *ngIf="login_form.controls.password.hasError('required') && login_form.controls.password.touched">
+      <p class="content add-error">Please Enter Password!</p>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error error-spc"
+      *ngIf="login_form.controls.password.hasError('incorrect') && login_form.controls.password.touched">
+      <p class="content add-error">Invalid password.</p>
+    </ion-item>
+
+    <div class="btns-bottom">
+      <ion-button expand="block" size="large" color="light" mode="md" class="btn-signin" (click)="doLogin()">Sign in</ion-button>
+      
+      <!-- <ion-checkbox mode="md"></ion-checkbox>
+      <ion-label color="light">Remember Me</ion-label> -->
+      <!-- <ion-item lines="none" class="me">
+          <ion-label color="light" class="me-lbl">Remember Me</ion-label>
+          <ion-checkbox slot="start" mode="md" role="checkbox"></ion-checkbox>
+        </ion-item> -->
+    </div>
+
+    </div>
+
+  </form>
+
+</ion-content>

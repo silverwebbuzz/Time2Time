@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar color="primary" class="clr" text-center>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" color="light">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">
+      Edit Member
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="editmembers_form" (ngSubmit)="editMember()" autocomplete="off">
+
+    <ion-item lines="none" class="input-item">
+      <ion-label position="stacked" class="input-lbl">First Name</ion-label>
+      <ion-input type="text" formControlName="firstname" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.firstname.hasError('required') && editmembers_form.controls.firstname.touched">
+      <p class="content">Please Enter First Name!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Last Name</ion-label>
+      <ion-input type="text" formControlName="lastname" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.lastname.hasError('required') && editmembers_form.controls.lastname.touched">
+      <p class="content">Please Enter Last Name!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Username</ion-label>
+      <ion-input type="text" formControlName="username" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.username.hasError('required') && editmembers_form.controls.username.touched">
+      <p class="content">Please Enter Username!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Email</ion-label>
+      <ion-input readonly type="text" formControlName="email" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.email.hasError('required') && editmembers_form.controls.email.touched">
+      <p class="content">Please Enter Email!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.email.hasError('pattern') && editmembers_form.controls.email.touched">
+      <p class="content">Please Enter Valid Email!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.email.hasError('incorrect') && editmembers_form.controls.email.touched">
+      <p class="content">Email is already taken!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Password</ion-label>
+      <ion-input type="password" formControlName="password" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.password.hasError('required') && editmembers_form.controls.password.touched">
+      <p class="content">Please Enter a Password!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.password.hasError('minlength') && editmembers_form.controls.password.touched">
+      <p class="content">The password needs at least 8 characters.</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.password.hasError('pattern') && editmembers_form.controls.password.touched">
+      <p class="content">Please Enter One Upper Case and One Lower Case, One Spacial Characters and One Number</p>
+    </ion-item>
+
+    <!-- <div class="form-group">
+      <label>Password</label>
+      <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+      </div>
+  </div> -->
+
+    <!-- <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Confirm Password</ion-label>
+      <ion-input type="password" formControlName="confirmpassword" color="primary" class="input-box boxes"
+        [ngClass]="{ 'is-invalid': submitted && f.confirmpassword.errors }"></ion-input>
+    </ion-item> -->
+
+    <!-- <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" formControlName="confirmpassword" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.confirmpassword.errors }" />
+      <div *ngIf="submitted && f.confirmpassword.errors" class="invalid-feedback">
+        <div *ngIf="f.confirmpassword.errors.mustMatch">Passwords must match</div>
+      </div>
+    </div> -->
+
+
+    <!-- <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.get('confirmpassword').errors && editmembers_form.get('confirmpassword').errors.confirmpassword">
+      <p class="content">Passwords must match!</p>
+    </ion-item> -->
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Phone</ion-label>
+      <ion-input type="number" formControlName="phone" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.phone.hasError('required') && editmembers_form.controls.phone.touched">
+      <p class="content">Please Enter Phone!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Permission</ion-label>
+      <ion-select interface="action-sheet" formControlName="id" placeholder="Select Permission" class="btn-select bg"
+        mode="md" [(ngModel)]="selectedgroup">
+        <ion-select-option *ngFor="let opt of permissionlist" [value]="opt.id">{{opt.group_name}}</ion-select-option>
+        <!-- <ion-select-option value="group_id">Admin</ion-select-option> -->
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="editmembers_form.controls.id.hasError('required') && editmembers_form.controls.id.touched">
+      <p class="content">Please Select Permission!</p>
+    </ion-item>
+
+    <div class="div-que add">
+
+      <ion-label class="lbl-head">Gender</ion-label>
+
+      <ion-radio-group formControlName="gender">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Male</ion-label>
+          <ion-radio slot="start" [value]="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Female</ion-label>
+          <ion-radio slot="start" [value]="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" class="btn-footer" (click)="editMember()">
+    Update
+  </ion-button>
+</ion-footer>
+

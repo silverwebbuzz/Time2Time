@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">DASHBOARD</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding class="page-home">
+
+  <div class="blue-background"></div>
+
+  <ion-row class="row-card top-spc side-spc">
+    <ion-col size="6" class="col-card">
+      <ion-card class="card-dash box1" (click)="box1()">
+        <ion-label class="lbl-only">Stock</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6" class="col-card">
+      <ion-card class="card-dash" (click)="box2()">
+        <ion-label class="lbl-only">Brands</ion-label>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="row-card side-spc">
+    <ion-col size="6" class="col-card">
+      <ion-card class="card-dash box1" (click)="box3()">
+        <ion-label class="lbl-only">Warehouse</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6" class="col-card">
+      <ion-card class="card-dash" (click)="box4()">
+        <ion-label class="lbl-only">Orders</ion-label>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="row-card side-spc">
+    <ion-col size="6" class="col-card">
+      <ion-card class="card-dash box1" (click)="dash5()">
+          <!-- <div class="div-icon">
+              <ion-icon src="../../assets/icon/stock-report.svg" class="dash-icon"></ion-icon>
+            </div> -->
+        <ion-label class="lbl-no">{{dash.Stock_report}}</ion-label>
+        <ion-label class="lbl-name">Total Stock</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6" class="col-card">
+      <ion-card class="card-dash" (click)="dash1()">
+        <!-- <div class="div-icon">
+          <ion-icon src="../../assets/icon/item_shopping-bag.svg" class="dash-icon"></ion-icon>
+        </div> -->
+        <ion-label class="lbl-no">{{dash.Total_Items}}</ion-label>
+        <ion-label class="lbl-name">Warehouse</ion-label>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="row-card side-spc bottom-spc">
+    <ion-col size="6" class="col-card">
+      <ion-card class="card-dash" (click)="dash2()">
+        <!-- <div class="div-icon">
+          <ion-icon src="../../assets/icon/sales.svg" class="dash-icon"></ion-icon>
+        </div> -->
+        <ion-label class="lbl-no">{{dash.Total_Sales}}</ion-label>
+        <ion-label class="lbl-name">Total Sales</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6" class="col-card">
+      <ion-card class="card-dash box2" (click)="dash6()">
+          <!-- <div class="div-icon">
+              <ion-icon src="../../assets/icon/purchases.svg" class="dash-icon"></ion-icon>
+            </div> -->
+        <ion-label class="lbl-no">{{dash.Purchases}}</ion-label>
+        <ion-label class="lbl-name">Purchases</ion-label>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  
+</ion-content>

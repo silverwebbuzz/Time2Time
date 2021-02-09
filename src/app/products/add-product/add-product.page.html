@@ -1,0 +1,157 @@
+<ion-header>
+  <ion-toolbar color="primary" class="clr" text-center>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">
+      Add Product
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="addproduct_form" autocomplete="off">
+
+    <div class="format-div">
+      <img src="{{imagePriview ? imagePriview : user_not_found_place_holder}}" class="format-img" />
+    </div>
+
+    <div class="upload-btn-wrapper">
+      <ion-button fill="clear" color="primary" expand="full" class="btn">Add Product Image</ion-button>
+      <input type="file" formControlName="image" (change)="imageUpload($event)" accept="image/*" />
+    </div>
+    <ion-item no-padding lines="none" class="validator-error error-item"
+      *ngIf="addproduct_form.controls.image.hasError('required') && addproduct_form.controls.image.touched">
+      <p class="content error-p">Please Select Image!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Refrence Number</ion-label>
+      <ion-input type="text" formControlName="name" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.name.hasError('required') && addproduct_form.controls.name.touched">
+      <p class="content">Please Enter Reference Number!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Serial</ion-label>
+      <ion-input type="text" formControlName="sku" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.sku.hasError('required') && addproduct_form.controls.sku.touched">
+      <p class="content">Please Enter Serial Number!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Price</ion-label>
+      <ion-input type="text" formControlName="price" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.price.hasError('required') && addproduct_form.controls.price.touched">
+      <p class="content">Please Enter Price!</p>
+    </ion-item>
+
+    <!-- <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Qty</ion-label>
+    <ion-input type="text" formControlName="qty" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.qty.hasError('required') && addproduct_form.controls.qty.touched">
+      <p class="content">Please Enter Quantity!</p>
+    </ion-item> -->
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Status</ion-label>
+      <ion-select interface="action-sheet" formControlName="qty" placeholder="Select Status" class="btn-select bg"
+        mode="md">
+        <ion-select-option value="0">Sold</ion-select-option>
+        <ion-select-option value="1">In Stock</ion-select-option>
+        <ion-select-option value="2">Consignment</ion-select-option>
+        <ion-select-option value="3">For Reparing</ion-select-option>
+        <ion-select-option value="4">Mr Rameez Personal Watch</ion-select-option>
+        <ion-select-option value="5">Return to Brand</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.qty.hasError('required') && addproduct_form.controls.qty.touched">
+      <p class="content">Please Select Status!</p>
+    </ion-item>
+
+    <!-- CKEditor -->
+    <ion-label position="stacked" class="input-lbl lbl-add">Description</ion-label>
+    <quill-editor class="editor" formControlName="description" [options]="editorOptions"></quill-editor>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.description.hasError('required') && addproduct_form.controls.description.touched">
+      <p class="content">Please Enter Description!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Items</ion-label>
+      <ion-select interface="action-sheet" multiple="true" formControlName="brand_id" placeholder="Select Items"
+        class="btn-select bg" mode="md">
+        <ion-select-option *ngFor="let opt of brand_list" [value]="opt.id">{{opt.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.brand_id.hasError('required') && addproduct_form.controls.brand_id.touched">
+      <p class="content">Please Select Items!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Category</ion-label>
+      <ion-select interface="action-sheet" multiple="true" formControlName="category_id" placeholder="Select Category"
+        class="btn-select bg" mode="md">
+        <ion-select-option *ngFor="let opt of category_list" [value]="opt.id">{{opt.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.category_id.hasError('required') && addproduct_form.controls.category_id.touched">
+      <p class="content">Please Select Category!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Warehouse</ion-label>
+      <ion-select interface="action-sheet" formControlName="store_id" placeholder="Select Warehouse"
+        class="btn-select bg" mode="md">
+        <ion-select-option *ngFor="let opt of warehouselist" [value]="opt.id">{{opt.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.store_id.hasError('required') && addproduct_form.controls.store_id.touched">
+      <p class="content">Please Select Warehouse!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Availability</ion-label>
+      <ion-select interface="action-sheet" formControlName="availability" placeholder="Select Availability"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="1">Yes</ion-select-option>
+        <ion-select-option value="2">No</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addproduct_form.controls.availability.hasError('required') && addproduct_form.controls.availability.touched">
+      <p class="content">Please Select Availability!</p>
+    </ion-item>
+
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" class="btn-footer" (click)="addProduct()">
+    Save
+  </ion-button>
+</ion-footer>

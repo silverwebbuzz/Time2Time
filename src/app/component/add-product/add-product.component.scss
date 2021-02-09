@@ -1,0 +1,70 @@
+.page-addProduct{
+    --background: #faf8f8;
+}
+
+.list-block{
+    --padding-start: 8px;
+    --inner-padding-end: 0px;
+    //padding: 3px 0px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px #ccc;
+
+    
+}
+.top{
+    &:nth-child(2){
+        margin-top:-32px;
+        box-shadow: 0px 4px 4px -4px #ccc;
+    }
+}
+.blue-background{
+    height: 25px;
+}
+.card-main{
+    width: 100%;
+    padding: 0px 0px 0px 5px;
+    margin: 5px; 
+    box-shadow: 0px 0px 0px #ccc;
+    background: #fff;
+
+    .row-card{
+        // padding-top: 1px;
+        padding: 0px;
+
+        .col-lbl{
+            // padding: 0px 0px 5px 0px;
+            padding: 0px;
+    
+            .col-title{
+                padding: 0px 8px;
+                //font-weight: bold;
+                font-size: 12px;
+                //vertical-align: middle;
+                //line-height: 24px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+                color: #999;
+                line-height: 1.2;
+            }
+    
+            .col-value{
+                padding: 0px 8px;
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 1.3;
+                color: #4e4d4d;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.add-lbl{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block !important;
+}

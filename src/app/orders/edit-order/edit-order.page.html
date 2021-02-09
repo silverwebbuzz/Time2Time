@@ -1,0 +1,211 @@
+<ion-header>
+    <ion-toolbar color="primary" class="clr" text-center>
+        <ion-buttons slot="start">
+            <ion-button (click)="back()" color="light">
+              <ion-icon name="arrow-back"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+      <ion-title color="light" class="head">
+        Edit Orders
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+
+      <form [formGroup]="editorder_form" autocomplete="off">
+  
+    <ion-item lines="none" class="input-item add-top addRL">
+      <ion-label position="stacked" class="input-lbl">Client Name</ion-label>
+      <ion-input type="text" formControlName="customer_name" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error addRL"
+      *ngIf="editorder_form.controls.customer_name.hasError('required') && editorder_form.controls.customer_name.touched">
+      <p class="content">Please Enter Client Name!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add addRL">
+      <ion-label position="stacked" class="input-lbl">Client Address</ion-label>
+      <ion-textarea rows="3" formControlName="customer_address" type="text" color="primary" class="input-box boxes">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error addRL"
+      *ngIf="editorder_form.controls.customer_address.hasError('required') && editorder_form.controls.customer_address.touched">
+      <p class="content">Please Enter Client Address!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add addRL">
+      <ion-label position="stacked" class="input-lbl">Client Phone</ion-label>
+      <ion-input type="text" formControlName="customer_phone" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error addRL"
+      *ngIf="editorder_form.controls.customer_phone.hasError('required') && editorder_form.controls.customer_phone.touched">
+      <p class="content">Please Enter Client Phone!</p>
+    </ion-item>
+  
+    <div class="div-product">
+      <!-- Edit  -->
+        <!-- <ng-container >
+            <ion-card class="card-main" *ngFor="let item of order_id;let i=index;">
+              <div formArrayName="add_product">
+                <div formGroupName="0">
+                  <ion-row class="row-card">
+                    <ion-col size="6" class="col-lbl">
+                      <ion-label class="col-title">Product</ion-label>
+                      <ion-input readonly class="col-value add-input no-border" formControlName="product_id"
+                        value="{{item.product_id}}"></ion-input>
+                    </ion-col>
+                    <ion-col size="4" class="col-lbl">
+                      <ion-label class="col-title">Qty</ion-label>
+                      <ion-input autofocus type="number" class="col-value add-input" formControlName="qty" (ionChange)="changeQty($event.target.value,i)"  value="{{item.qty}}"></ion-input>
+                    </ion-col>
+                    <ion-col size="2" class="col-edit">
+                      <ion-button size="small" fill="clear" class="dlt" (click)="removeControls(i)">
+                        <ion-icon name="trash" mode="md" class="btn-icon"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="row-card">
+                    <ion-col size="6" class="col-lbl">
+                      <ion-label class="col-title">Rate</ion-label>
+                      <ion-input readonly class="col-value add-input no-border" id="rate_{{item.id}}" formControlName="rate"
+                      value="{{item.rate}}"></ion-input>
+                    </ion-col>
+                    <ion-col size="4" class="col-lbl">
+                      <ion-label class="col-title">Amount</ion-label>
+                      <ion-input readonly class="col-value add-input no-border" formControlName="amount"
+                      value="{{item.amount}}"></ion-input>
+                    </ion-col>
+                    <ion-col size="2">
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+            </ion-card>
+          </ng-container> -->
+    
+          <!-- Add -->
+      <ng-container >
+        <ion-card class="card-main" *ngFor="let item of productList;let i=index;">
+          <div formArrayName="add_product">
+            <div formGroupName="0">
+              <ion-row class="row-card">
+                <ion-col size="6" class="col-lbl">
+                  <ion-label class="col-title">Product</ion-label>
+                  <ion-input readonly class="col-value add-input no-border" formControlName="product_id"
+                    value="{{item.name}}"></ion-input>
+                </ion-col>
+                <ion-col size="4" class="col-lbl">
+                  <ion-label class="col-title">Qty</ion-label>
+                  <ion-input autofocus type="number" class="col-value add-input" formControlName="qty" (ionChange)="changeQty($event.target.value,i)"  value="{{item.qty}}"></ion-input>
+                </ion-col>
+                <ion-col size="2" class="col-edit">
+                  <ion-button size="small" fill="clear" class="dlt" (click)="removeControls(i)">
+                    <ion-icon name="trash" mode="md" class="btn-icon"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row-card">
+                <ion-col size="6" class="col-lbl">
+                  <ion-label class="col-title">Rate</ion-label>
+                  <ion-input readonly class="col-value add-input no-border" formControlName="rate"
+                  value="{{item.price}}"></ion-input>
+                </ion-col>
+                <ion-col size="4" class="col-lbl">
+                  <ion-label class="col-title">Amount</ion-label>
+                  <ion-input readonly class="col-value add-input no-border" formControlName="amount"
+                  value="{{item.amount}}"></ion-input>
+                </ion-col>
+                <ion-col size="2">
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ion-button expand="full" class="btn-footer add-btn" (click)="addProduct()">
+        Add Product
+      </ion-button>
+
+    </div>
+  
+    <ion-item lines="none" class="input-item add addRL">
+      <ion-label position="stacked" class="input-lbl">Gross Amount</ion-label>
+      <ion-input readonly type="text" formControlName="gross_amount" color="primary" class="input-box boxes" [(ngModel)]="grossAmount"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error addRL"
+      *ngIf="editorder_form.controls.gross_amount.hasError('required') && editorder_form.controls.gross_amount.touched">
+      <p class="content">Please Enter Gross Amount!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add addRL">
+      <ion-label position="stacked" class="input-lbl">S-Charge {{scharge}} %</ion-label>
+      <ion-input readonly type="text" formControlName="service_charge" color="primary" [(ngModel)]="sCharge"
+        class="input-box boxes">
+      </ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error addRL"
+      *ngIf="editorder_form.controls.service_charge.hasError('required') && editorder_form.controls.service_charge.touched">
+      <p class="content">Please Enter S-Charge!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add addRL">
+      <ion-label position="stacked" class="input-lbl">Vat {{vcharge}} %</ion-label>
+      <ion-input readonly type="text" formControlName="vat_charge" color="primary" [(ngModel)]="vat"
+        class="input-box boxes">
+      </ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error addRL"
+      *ngIf="editorder_form.controls.vat_charge.hasError('required') && editorder_form.controls.vat_charge.touched">
+      <p class="content">Please Enter Vat!</p>
+    </ion-item>
+  
+    <ion-item lines="none" class="input-item add addRL">
+      <ion-label position="stacked" class="input-lbl">Discount</ion-label>
+      <ion-input type="text" formControlName="discount" color="primary" class="input-box boxes" (ionChange)="discountApply($event.target.value)"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-erro addRL"
+      *ngIf="editorder_form.controls.discount.hasError('required') && editorder_form.controls.discount.touched">
+      <p class="content">Please Enter Discount!</p>
+    </ion-item>
+  
+    <ion-item lines="none" class="input-item add addRL">
+      <ion-label position="stacked" class="input-lbl">Net Amount</ion-label>
+      <ion-input readonly type="text" formControlName="net_amount" color="primary" class="input-box boxes" [ngModel]="netAmount.toFixed(2)"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error addRL"
+      *ngIf="editorder_form.controls.net_amount.hasError('required') && editorder_form.controls.net_amount.touched">
+      <p class="content">Please Enter Net Amount!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add add-bottom addRL">
+        <ion-label position="stacked" class="lbl-dropdown">Paid Status</ion-label>
+        <ion-select interface="action-sheet" formControlName="paid_status" class="btn-select bg" mode="md">
+          <ion-select-option value="1" selected>Paid</ion-select-option>
+          <ion-select-option value="2">Unpaid</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="editorder_form.controls.paid_status.hasError('required') && editorder_form.controls.paid_status.touched">
+        <p class="content">Please Select Paid Status!</p>
+      </ion-item>
+
+    </form>
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-button expand="full" class="btn-footer" (click)="editOrder()">
+      Update
+    </ion-button>
+  </ion-footer>

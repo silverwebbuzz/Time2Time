@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="primary" class="clr" text-center>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">
+      Company
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <form [formGroup]="company_form" autocomplete="off">
+
+  <ion-item lines="none" class="input-item">
+    <ion-label position="stacked" class="input-lbl">Company Name</ion-label>
+    <ion-input type="text" formControlName="company_name" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="company_form.controls.company_name.hasError('required') && company_form.controls.company_name.touched">
+      <p class="content">Please Enter Company Name!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Charge Amount (%)</ion-label>
+    <ion-input type="number" formControlName="service_charge_value" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="company_form.controls.service_charge_value.hasError('required') && company_form.controls.service_charge_value.touched">
+      <p class="content">Please Enter Charge Amount!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Vat Charge (%)</ion-label>
+    <ion-input type="number" formControlName="vat_charge_value" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="company_form.controls.vat_charge_value.hasError('required') && company_form.controls.vat_charge_value.touched">
+      <p class="content">Please Enter Vat Charge!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Address</ion-label>
+    <ion-input type="text" formControlName="address" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="company_form.controls.address.hasError('required') && company_form.controls.address.touched">
+      <p class="content">Please Enter Address!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Phone</ion-label>
+    <ion-input type="number" formControlName="phone" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="company_form.controls.phone.hasError('required') && company_form.controls.phone.touched">
+      <p class="content">Please Enter Phone!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-label position="stacked" class="input-lbl">Country</ion-label>
+    <ion-input type="text" formControlName="country" color="primary" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="company_form.controls.country.hasError('required') && company_form.controls.country.touched">
+      <p class="content">Please Enter Country!</p>
+    </ion-item>
+
+  <!-- CKEditor -->  
+  <ion-label position="stacked" class="input-lbl lbl-add">Message</ion-label>
+  <quill-editor class="editor" formControlName="message" [options]="editorOptions"></quill-editor>
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="company_form.controls.message.hasError('required') && company_form.controls.message.touched">
+      <p class="content">Please Enter Message!</p>
+    </ion-item>
+
+  <ion-item lines="none" class="item-dropdown add">
+    <ion-label position="stacked" class="lbl-dropdown">Currency</ion-label>
+    <ion-select interface="action-sheet" formControlName="currency" placeholder="Select Currency" class="btn-select bg" mode="md" [(ngModel)]="currencyselect">
+      <ion-select-option *ngFor="let opt of comlist | keyvalue">{{opt.key}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  
+
+  <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="company_form.controls.currency.hasError('required') && company_form.controls.currency.touched">
+      <p class="content">Please Select Currency!</p>
+    </ion-item>
+
+    </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" class="btn-footer"(click)="UpdateCompany()">
+    Save
+  </ion-button>
+</ion-footer>
+

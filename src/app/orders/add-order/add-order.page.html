@@ -1,0 +1,201 @@
+<ion-header>
+  <ion-toolbar color="primary" class="clr" text-center>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">
+      Add New Orders
+    </ion-title>
+  </ion-toolbar>
+  <!-- <ion-toolbar color="primary">
+      <ion-label class="lbl-date" color="light">
+        Date: 12-11-2019 <span class="lbl-time">Date: 11:06 AM</span>
+      </ion-label>
+    </ion-toolbar> -->
+  </ion-header>
+  
+  <ion-content>
+  
+    <form [formGroup]="addorder_form" autocomplete="off">
+  
+      <ion-item lines="none" class="input-item add-top addRL">
+        <ion-label position="stacked" class="input-lbl">Client Name</ion-label>
+        <ion-input type="text" formControlName="customer_name" color="primary" class="input-box boxes"></ion-input>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="addorder_form.controls.customer_name.hasError('required') && addorder_form.controls.customer_name.touched">
+        <p class="content">Please Enter Client Name!</p>
+      </ion-item>
+  
+      <ion-item lines="none" class="input-item add addRL">
+        <ion-label position="stacked" class="input-lbl">Client Address</ion-label>
+        <ion-textarea rows="3" formControlName="customer_address" type="text" color="primary" class="input-box boxes">
+        </ion-textarea>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="addorder_form.controls.customer_address.hasError('required') && addorder_form.controls.customer_address.touched">
+        <p class="content">Please Enter Client Address!</p>
+      </ion-item>
+  
+      <ion-item lines="none" class="input-item add addRL">
+        <ion-label position="stacked" class="input-lbl">Client Phone</ion-label>
+        <ion-input type="number" formControlName="customer_phone" color="primary" class="input-box boxes"></ion-input>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="addorder_form.controls.customer_phone.hasError('required') && addorder_form.controls.customer_phone.touched">
+        <p class="content">Please Enter Client Phone!</p>
+      </ion-item>
+
+    <div class="div-product">
+
+      <ng-container *ngIf="productList.length > 0">
+      <ion-card class="card-main" *ngFor="let item of productList;let i=index;">
+        <div formArrayName="add_product">
+        <div formGroupName="0">
+            <ion-row class="row-card">
+              <ion-col size="6" class="col-lbl">
+                <ion-label class="col-title">Product</ion-label>
+                <ion-input readonly class="col-value add-input no-border" formControlName="product_id" value="{{item.name}}"></ion-input>
+              </ion-col>
+              <ion-col size="4" class="col-lbl">
+                <ion-label class="col-title">Qty</ion-label>
+                <ion-input autofocus type="number" class="col-value add-input" formControlName="qty" (ionChange)="changeQty($event.target.value,i)" value="{{item.qty}}"></ion-input>
+              </ion-col>
+              <ion-col size="2" class="col-edit">
+                <ion-button size="small" fill="clear" class="dlt" (click)="removeControls(i)">
+                  <ion-icon name="trash" mode="md" class="btn-icon"></ion-icon>
+                </ion-button>
+                <!-- <ion-button size="small" fill="clear" class="btn-edit" *ngIf="!item.expanded">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </ion-button>
+                <ion-button size="small" fill="clear" class="btn-edit" *ngIf="item.expanded">
+                  <ion-icon name="arrow-down"></ion-icon>
+                </ion-button> -->
+              </ion-col>
+          </ion-row>
+          <!-- <ion-card-content class="main-card-content">
+              <app-expandable expandHeight="100px" [expanded]="item.expanded"> -->
+                <ion-row class="row-card">
+                  <ion-col size="6" class="col-lbl">
+                    <ion-label class="col-title">Rate</ion-label>
+                    <ion-input readonly class="col-value add-input no-border"  formControlName="rate" value="{{item.price}}"></ion-input>
+                  </ion-col>
+                  <ion-col size="4" class="col-lbl">
+                    <ion-label class="col-title">Amount</ion-label>
+                    <ion-input readonly class="col-value add-input no-border" formControlName="amount" value="{{item.amount}}"></ion-input>
+                  </ion-col>
+                  <ion-col size="2">
+                  </ion-col>
+                </ion-row>
+              </div>
+              </div>
+              <!-- </app-expandable>
+            </ion-card-content> -->
+        </ion-card>
+      </ng-container>
+
+      <ion-button expand="full" class="btn-footer add-btn" (click)="addProduct()">
+        Add Product
+      </ion-button>
+
+    </div>
+
+    <!-- <ion-card class="card-main">
+        <ng-container *ngIf="productList.length > 0">
+          <div class="div-main" *ngFor="let add of productList">
+            <ion-row class="row-card">
+              <ion-col size="3" class="col-lbl">
+                <ion-label class="col-title">Product</ion-label>
+                <ion-label class="col-value">{{add.name}}</ion-label>
+              </ion-col>
+              <ion-col size="2" class="col-lbl">
+                <ion-label class="col-title">Qty</ion-label>
+                <ion-input class="col-value add-input">{{add.qty}}</ion-input>
+              </ion-col>
+              <ion-col size="2" class="col-lbl">
+                <ion-label class="col-title">Rate</ion-label>
+                <ion-label class="col-value">{{add.price}}</ion-label>
+              </ion-col>
+              <ion-col size="3" class="col-lbl">
+                <ion-label class="col-title">Amount</ion-label>
+                <ion-label class="col-value">{{add.price}}</ion-label>
+              </ion-col>
+              <ion-col size="2" class="col-lbl add-btn">
+                <ion-button size="small" fill="clear" class="dlt" (click)="removeControls(add.id)">
+                  <ion-icon name="trash" mode="md"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            </div>
+        </ng-container>
+        <ion-button expand="full" class="btn-footer" (click)="addProduct()">
+          Add Product
+        </ion-button>
+  
+      </ion-card> -->
+  
+      <ion-item lines="none" class="input-item add-top addRL">
+        <ion-label position="stacked" class="input-lbl">Gross Amount</ion-label>
+        <ion-input readonly type="text" formControlName="gross_amount" color="primary" [(ngModel)]="grossAmount" class="input-box boxes">
+        </ion-input>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="addorder_form.controls.gross_amount.hasError('required') && addorder_form.controls.gross_amount.touched">
+        <p class="content">Please Enter Gross Amount!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add-top addRL">
+        <ion-label position="stacked" class="input-lbl">S-Charge {{scharge}} %</ion-label>
+        <ion-input readonly type="text" formControlName="service_charge" color="primary" [(ngModel)]="sCharge" class="input-box boxes">
+        </ion-input>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="addorder_form.controls.service_charge.hasError('required') && addorder_form.controls.service_charge.touched">
+        <p class="content">Please Enter S-Charge!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add-top addRL">
+        <ion-label position="stacked" class="input-lbl">Vat {{vcharge}} %</ion-label>
+        <ion-input readonly type="text" formControlName="vat_charge" color="primary" [(ngModel)]="vat" class="input-box boxes">
+        </ion-input>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="addorder_form.controls.vat_charge.hasError('required') && addorder_form.controls.vat_charge.touched">
+        <p class="content">Please Enter Vat!</p>
+      </ion-item>
+  
+      <ion-item lines="none" class="input-item add addRL">
+        <ion-label position="stacked" class="input-lbl">Discount</ion-label>
+        <ion-input type="number" formControlName="discount" color="primary" class="input-box boxes" (ionChange)="discountApply($event.target.value)"></ion-input>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="addorder_form.controls.discount.hasError('required') && addorder_form.controls.discount.touched">
+        <p class="content">Please Enter Discount!</p>
+      </ion-item>
+  
+      <ion-item lines="none" class="input-item add add-bottom addRL">
+        <ion-label position="stacked" class="input-lbl">Net Amount</ion-label>
+        <ion-input readonly type="number" formControlName="net_amount" color="primary" [ngModel]="netAmount.toFixed(2)" class="input-box boxes"></ion-input>
+      </ion-item>
+  
+      <ion-item no-padding lines="none" class="validator-error addRL"
+        *ngIf="addorder_form.controls.net_amount.hasError('required') && addorder_form.controls.net_amount.touched">
+        <p class="content">Please Enter Net Amount!</p>
+      </ion-item>
+  
+    </form>
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-button expand="full" class="btn-footer" (click)="addOrder()">
+      Create Order
+    </ion-button>
+  </ion-footer>

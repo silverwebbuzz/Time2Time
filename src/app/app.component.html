@@ -1,0 +1,51 @@
+<ion-app>
+  <ion-menu contentId="content" class="menu-container">
+    <ion-header>
+      <ion-toolbar class="head-tool">
+        <ion-card class="card-profile">
+          <img src="../assets/image/logo1.png" class="profile-pic" />
+        </ion-card>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+
+      <div *ngFor="let p of pages">
+
+        <ion-menu-toggle *ngIf="p.url">
+          <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active" mode="md" lines="none" class="items">
+            <fa-icon [icon]="p.faIcon" slot="start" class="spc"></fa-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.active-parent]="p.open"
+          detail="false" mode="md" lines="none" class="items">
+          <fa-icon [icon]="p.faIcon" slot="start" class="spc"></fa-icon>
+          <ion-icon slot="end" name="arrow-forward" *ngIf="!p.open" class="icon-end"></ion-icon>
+          <ion-icon slot="end" name="arrow-down" *ngIf="p.open" class="icon-end"></ion-icon>
+          <ion-label>{{ p.title }}</ion-label>
+        </ion-item>
+
+        <ion-list *ngIf="p.open" class="spc-menu">
+          <ion-menu-toggle>
+            <ion-item *ngFor="let sub of p.children" [routerLink]="sub.url" routerDirection="root"
+              routerLinkActive="active" mode="md" lines="none" class="sub-item items">
+              <fa-icon [icon]="sub.faIcon" slot="start" class="spc"></fa-icon>
+              <ion-label>{{ sub.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+      </div>
+
+      <ion-item mode="md" lines="none" class="items" (click)="logout()">
+          <fa-icon [icon]="faSignOutAlt" slot="start"></fa-icon>
+          <ion-label>Logout</ion-label>
+      </ion-item>
+
+    </ion-content>
+
+  </ion-menu>
+  <ion-router-outlet id="content" main></ion-router-outlet>
+</ion-app>

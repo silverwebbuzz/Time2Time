@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar color="primary" text-center>
+      <ion-buttons slot="start">
+        <ion-button (click)="back()" color="light">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title color="light" class="head">
+        Add Warehouse
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding> 
+
+      <form [formGroup]="addwarehouse_form" autocomplete="off">
+  
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Warehouse Name</ion-label>
+      <ion-input type="text" formControlName="name" color="primary" class="input-box boxes"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addwarehouse_form.controls.name.hasError('required') && addwarehouse_form.controls.name.touched">
+      <p class="content">Please Enter Warehouse Name!</p>
+    </ion-item>
+  
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Status</ion-label>
+      <ion-select interface="action-sheet" formControlName="active" placeholder="Select Status"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="1" selected>Active</ion-select-option>
+        <ion-select-option value="2">Inactive</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="addwarehouse_form.controls.active.hasError('required') && addwarehouse_form.controls.active.touched">
+      <p class="content">Please Select Warehouse Status!</p>
+    </ion-item>
+
+    </form>
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-button expand="full" class="btn-footer" (click)="addWarehouse()">Save</ion-button>
+  </ion-footer>

@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-toolbar color="primary" text-center>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()" color="light">
+        <ion-icon name="close" mode="md"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">
+      Add Product
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar color="light" placeholder="Search..." (ionChange)="searchBar($event.target.value)">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content class="page-addProduct">
+
+  <div class="blue-background"></div>
+
+  <div class="isEmpty" *ngIf="productlist?.length == 0">
+      <ion-label class="lbl-empty">No Record Found!</ion-label>
+    </div>
+
+  <div class="top">
+  <ion-radio-group *ngFor="let item of productlist | slice:0:limit">
+    <ion-item lines="none" class="list-block">
+      <ng-container>
+        <ion-radio mode="md" (ionSelect)="changeShippingAddress(item)"></ion-radio>
+      </ng-container>
+      <!-- <ion-card class="card-main">
+              <ion-row class="row-card">
+                <ion-col size="12" class="col-lbl">
+                  <ion-label class="col-title">Product</ion-label>
+                  <ion-label class="col-value">8680-4</ion-label>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row-card">
+                  <ion-col size="4" class="col-lbl">
+                      <ion-label class="col-title">Qty</ion-label>
+                      <ion-label class="col-value">1</ion-label>
+                    </ion-col>
+                  <ion-col size="4" class="col-lbl">
+                    <ion-label class="col-title">Rate</ion-label>
+                    <ion-label class="col-value">349</ion-label>
+                  </ion-col>
+                  <ion-col size="4" class="col-lbl">
+                      <ion-label class="col-title">Amount</ion-label>
+                      <ion-label class="col-value">349.00</ion-label>
+                    </ion-col>
+                </ion-row>
+          </ion-card> -->
+      <!-- <ion-card class="card-main">
+              <ion-row class="row-card">
+                <ion-col size="5" class="col-lbl">
+                  <ion-label class="col-title">Product</ion-label>
+                  <ion-label class="col-value">8680-4</ion-label>
+                </ion-col>
+                  <ion-col size="2" class="col-lbl">
+                      <ion-label class="col-title">Qty</ion-label>
+                      <ion-label class="col-value">1</ion-label>
+                    </ion-col>
+                  <ion-col size="2" class="col-lbl">
+                    <ion-label class="col-title">Rate</ion-label>
+                    <ion-label class="col-value">349</ion-label>
+                  </ion-col>
+                  <ion-col size="3" class="col-lbl">
+                      <ion-label class="col-title">Amount</ion-label>
+                      <ion-label class="col-value">349.00</ion-label>
+                    </ion-col>
+                </ion-row>
+          </ion-card> -->
+      <ion-card class="card-main">
+        <ion-row class="row-card">
+          <ion-col size="8" class="col-lbl">
+            <ion-label class="col-title">Product</ion-label>
+            <ion-label class="col-value add-lbl">{{item.name}}</ion-label>
+          </ion-col>
+          <ion-col size="4" class="col-lbl">
+            <ion-label class="col-title">Rate</ion-label>
+            <ion-label class="col-value">{{item.price}}</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-item>
+  </ion-radio-group>
+  </div>
+
+  <!-- <ion-item lines="none" class="item-dropdown add">
+    <ion-select interface="action-sheet" formControlName="product_id" placeholder="Product" class="btn-select bg size" mode="md">
+      <ion-select-option *ngFor="let opt of productlist">{{opt.name}}</ion-select-option>
+     
+    </ion-select>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+    *ngIf="addorder_form.controls.product_id.hasError('required') && addorder_form.controls.product_id.touched">
+    <p class="content">Please Select Product!</p>
+  </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-input type="text" formControlName="qty" color="primary" placeholder="Qty" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+    *ngIf="addorder_form.controls.qty.hasError('required') && addorder_form.controls.qty.touched">
+    <p class="content">Please Enter Quantity!</p>
+  </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-input disabled type="text" formControlName="rate" color="primary" placeholder="Rate" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+    *ngIf="addorder_form.controls.rate.hasError('required') && addorder_form.controls.rate.touched">
+    <p class="content">Please Enter Rate!</p>
+  </ion-item>
+
+  <ion-item lines="none" class="input-item add">
+    <ion-input disabled type="text" formControlName="amount" color="primary" placeholder="Amount" class="input-box boxes"></ion-input>
+  </ion-item>
+
+  <ion-item no-padding lines="none" class="validator-error"
+    *ngIf="addorder_form.controls.amount.hasError('required') && addorder_form.controls.amount.touched">
+    <p class="content">Please Enter Amount!</p>
+  </ion-item> -->
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<!-- <ion-footer>
+
+  <ion-button class="btn-footer">Add</ion-button>
+
+</ion-footer> -->

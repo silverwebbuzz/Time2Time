@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="primary" class="clr" text-center>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light" class="head">
+      Manage Orders
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar color="light" placeholder="Search..." (ionChange)="searchBar($event.target.value)"></ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar color="primary" class="lbl-tool-result">
+    <ion-label class="lbl-result">About {{order?.length}} results</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-orders">
+
+  <div class="blue-background"></div>
+
+  <div class="isEmpty" *ngIf="order?.length == 0">
+      <ion-label class="lbl-empty">No Record Found!</ion-label>
+    </div>
+
+  <ion-card class="card-main" *ngFor="let item of order | slice:0:limit">
+    <ion-row class="row-card" (click)="expandItem(item)">
+      <ion-col size="10" class="col-lbl">
+        <ion-label class="col-title">Bill no</ion-label>
+        <ion-label class="col-value">{{item.bill_no}}</ion-label>
+      </ion-col>
+      <ion-col size="2" class="col-edit">
+        <ion-button size="small" fill="clear" class="btn-edit" *ngIf="!item.expanded">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
+        <ion-button size="small" fill="clear" class="btn-edit" *ngIf="item.expanded">
+          <ion-icon name="arrow-down"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-card-content class="main-card-content">
+      <app-expandable expandHeight="100px" [expanded]="item.expanded">
+        <ion-row class="row-card">
+          <ion-col size="10" class="col-lbl">
+            <ion-label class="col-title">Client Name</ion-label>
+            <ion-label class="col-value">{{item.customer_name}}</ion-label>
+          </ion-col>
+          <ion-col size="2"></ion-col>
+        </ion-row>
+        <ion-row class="row-card">
+          <ion-col size="10" class="col-lbl">
+            <ion-label class="col-title">Client Phone</ion-label>
+            <ion-label class="col-value">{{item.customer_phone}}</ion-label>
+          </ion-col>
+          <ion-col size="2" class="col-lbl add">
+            <!-- <ion-button size="small" fill="clear" class="print">
+              <ion-icon name="print" mode="md" class="btn-icon"></ion-icon>
+            </ion-button> -->
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-card">
+          <ion-col size="6" class="col-lbl">
+            <ion-label class="col-title">Total Products</ion-label>
+            <ion-label class="col-value">{{item.total_product}}</ion-label>
+          </ion-col>
+          <ion-col size="4" class="col-lbl">
+            <ion-label class="col-title">Total Amount</ion-label>
+            <ion-label class="col-value">{{item.net_amount}}</ion-label>
+          </ion-col>
+          <ion-col size="2" class="col-lbl add">
+            <ion-button  [hidden]="permission == 'client1'" size="small" fill="clear" class="edit" (click)="edit(item.id)">
+              <ion-icon name="create" mode="md" class="btn-icon"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-card">
+          <ion-col size="10" class="col-lbl">
+            <ion-label class="col-title">Date Time</ion-label>
+            <ion-label class="col-value" >{{myDate | date:'dd-MM-yyyy hh:mm a'}}</ion-label>
+          </ion-col>
+          <ion-col size="2" class="col-lbl add">
+            <ion-button  [hidden]="permission == 'client1'" size="small" fill="clear" class="dlt" (click)="delete(item.id)">
+              <ion-icon name="trash" mode="md" class="btn-icon"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </app-expandable>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="sharePicker()">
+      <ion-icon name="Share-alt" color="light"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button [hidden]="permission == 'client1'" expand="full" class="btn-footer" routerLink="/add-order">
+    Add Order
+  </ion-button>
+</ion-footer>

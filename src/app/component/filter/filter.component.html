@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar text-center>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="close" mode="md"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="head">
+      Filter
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Quantity</ion-label>
+        <ion-select interface="action-sheet" placeholder="Select Quantity"
+          class="btn-select bg" mode="md" (ionChange)="changeAddress($event.target.value,'Quantity')">
+          <ion-select-option value="" [selected]= 'quantity == null'>All</ion-select-option>
+          <ion-select-option value="0" [selected]= 'quantity == 0'>In Stock</ion-select-option>
+          <ion-select-option value="1" [selected]= 'quantity == 1'>Sold</ion-select-option>
+          <ion-select-option value="2" [selected]= 'quantity == 2'>Consignment</ion-select-option>
+          <ion-select-option value="3" [selected]= 'quantity == 3'>For Reparing</ion-select-option>
+          <ion-select-option value="4" [selected]= 'quantity == 4'>Mr Rameez Personal Watch</ion-select-option>
+          <ion-select-option value="5" [selected]= 'quantity == 5'>Return to Brand</ion-select-option>
+        </ion-select>
+      </ion-item> 
+
+      <ion-item lines="none" class="item-dropdown add">
+          <ion-label position="stacked" class="lbl-dropdown">Warehouse</ion-label>
+          <ion-select multiple="true" [placeholder]="warehouse ? warehouse : 'Select Warehouse'"
+            class="btn-select bg arrow-end" [value]="warehouse" mode="ios" (ionChange)="changeAddress($event.target.value,'Warehouse')"> 
+            <ion-select-option [value]=null>All</ion-select-option>
+            <ion-select-option *ngFor="let opt of warehouselist;let i=index" [value]="opt.name" [selected]="i == 2">{{opt.name}}</ion-select-option>  
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="none" class="item-dropdown add">
+            <ion-label position="stacked" class="lbl-dropdown">Brand</ion-label>
+            <ion-select interface="action-sheet" [placeholder]="category ? category : 'Select Brand'"
+              class="btn-select bg" [value]="category" mode="md" (ionChange)="changeAddress($event.target.value,'Category')">
+              <ion-select-option [value]=null [selected]= 'category == null'>All</ion-select-option>
+              <ion-select-option *ngFor="let opt of categorylist" [value]="opt.name" [selected]="category === opt.name">{{opt.name}}</ion-select-option> 
+            </ion-select>
+          </ion-item> 
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col size="6" class="col-footer">
+      <ion-button expand="full" class="btn-reset" (click)="reset()">Reset</ion-button>
+    </ion-col>
+    <ion-col size="6" class="col-footer">
+        <ion-button expand="full" class="btn-apply" (click)="onChange()">Apply</ion-button>
+      </ion-col>
+  </ion-row>
+</ion-footer>

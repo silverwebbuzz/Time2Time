@@ -1,0 +1,19 @@
+.editor{
+    min-height: 16em;
+       max-height: 20em;
+       overflow-y: auto;
+}
+.add{
+    margin-top: 8px;
+}
+.btn-footer{
+    margin: 0px;
+    color: #fff;
+    --color-activated: #fff;
+}
+.lbl-add{
+    font-weight: bold;
+    color: #888;
+    display: block;
+    margin-top: 15px;
+}
